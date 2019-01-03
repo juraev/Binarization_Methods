@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <Libs/CImg.h>
 
 using namespace std;
 
