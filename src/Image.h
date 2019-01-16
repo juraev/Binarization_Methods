@@ -128,8 +128,7 @@ public:
     		t = (mx - mn) / 2;
     		uchar g;
     		g = img(x, y, 0);
-    		if(t > g)
-    			bw->draw_point(x, y, WHITE);
+			bw->draw_point(x, y, g > t ? WHITE : BLACK);
     	}
     	return bw;
     }
@@ -149,7 +148,7 @@ public:
 		return bw;
 	}
 
-    CImg<uchar>* SauvolaTech(int r = 15, float k = 0.5, int R = 128){
+    CImg<uchar>* SauvolaTech(int r = 15, float k = 0.34, int R = 128){
     	std::clog << "sauvola...";
     	CImg<uchar>* bw = new CImg<uchar>(_width, _height);
 		int x1, x2, y1, y2;
