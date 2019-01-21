@@ -64,7 +64,7 @@ public:
         return img(x, y, 0, 1);
     }
 
-    void inline computeMeanAndVar(int x, int y, int& r, int& x1,
+    void inline computeMeanAndDev(int x, int y, int& r, int& x1,
     			int& x2, int& y1, int& y2, double& mean, double& var){
     	mean = 0;
     	var = 0;
@@ -84,6 +84,7 @@ public:
 		mean /= pixnum;
 		var /= pixnum;
 		var -= mean * mean;
+		var = sqrt(var);
     }
 
     void inline computeMaxMin(int x, int y, int& r, int& x1,
@@ -117,7 +118,7 @@ public:
 	}
 
     CImg<uchar>* bernsenTech(int r){
-    	std::clog << "bernsen...";
+    	std::clog << "bernsen...\n";
     	CImg<uchar>* bw = new CImg<uchar>(_width, _height, 1, 3, 0);
     	int x1, x2, y1, y2;
     	double mx, mn;
@@ -134,13 +135,13 @@ public:
     }
 
     CImg<uchar>* NiblackTech(int r = 15, float k = -0.2){
-    	std::clog << "niblack...";
+    	std::clog << "niblack...\n";
     	CImg<uchar>* bw = new CImg<uchar>(_width, _height);
 		int x1, x2, y1, y2;
 		double mean, var;
 		uchar t;
 		cimg_forXY(*bw, x, y){
-			computeMeanAndVar(x, y, r, x1, x2, y1, y2, mean, var);
+			computeMeanAndDev(x, y, r, x1, x2, y1, y2, mean, var);
 			t = mean + k * var;
 			uchar z = img(x, y, 0);
 			bw->draw_point(x, y, z > t ? WHITE : BLACK);
@@ -148,20 +149,53 @@ public:
 		return bw;
 	}
 
-    CImg<uchar>* SauvolaTech(int r = 15, float k = 0.34, int R = 128){
-    	std::clog << "sauvola...";
+    CImg<uchar>* SauvolaTech(int r = 3, float k = 0.64, int R = 128){
+    	std::clog << "sauvola...\n";
     	CImg<uchar>* bw = new CImg<uchar>(_width, _height);
 		int x1, x2, y1, y2;
 		double mean, var;
 		uchar t;
 		cimg_forXY(*bw, x, y){
-			computeMeanAndVar(x, y, r, x1, x2, y1, y2, mean, var);
+			computeMeanAndDev(x, y, r, x1, x2, y1, y2, mean, var);
 			t = mean * (1 + k * (var / R - 1));
 			uchar z = img(x, y, 0);
 			bw->draw_point(x, y, z > t ? WHITE : BLACK);
 		}
 		return bw;
 	}
+
+    CImg<uchar>* OtsuTech(){
+    	std::clog<<"otsu...\n";
+    	CImg<uchar>* bw = new CImg<uchar>(_width, _height);
+    	int hist[256];
+    	for(int i = 0; i < 256; i ++) hist[i] = 0;
+    	int pixnum = img._width * img._height;
+    	double sum = 0;
+    	cimg_forXY(*bw, x, y){
+    		uchar z = img(x, y, 0);
+    		hist[z] ++;
+    		sum += z;
+    	}
+    	sum /= pixnum;
+    	double w1 = 0, w2 = 1, m1 = 0, m2 = sum;
+    	double mn = 0, tmp = 0;
+    	uchar th = 0;
+    	for (int t = 0; t < 256; t ++){
+    		w1 += hist[t] * 1.0 / pixnum;
+    		w2 -= hist[t] * 1.0 / pixnum;
+    		m1 += t * hist[t] * 1.0 / pixnum;
+    		m2 -= t * hist[t] * 1.0 / pixnum;
+    		tmp = w1 * w2 * (m1 / w1 - m2 / w2) * (m1 / w1 - m2 / w2);
+    		if(mn < tmp) mn = tmp, th = t;
+    	}
+    	std::clog << int(th) << "\n";
+    	cimg_forXY(*bw, x, y){
+    		uchar z = img(x, y, 0);
+    		bw->draw_point(x, y, z > th ? WHITE : BLACK);
+    	}
+
+    	return bw;
+    }
 };
 
 
