@@ -188,7 +188,6 @@ public:
     		tmp = w1 * w2 * (m1 / w1 - m2 / w2) * (m1 / w1 - m2 / w2);
     		if(mn < tmp) mn = tmp, th = t;
     	}
-    	std::clog << int(th) << "\n";
     	cimg_forXY(*bw, x, y){
     		uchar z = img(x, y, 0);
     		bw->draw_point(x, y, z > th ? WHITE : BLACK);

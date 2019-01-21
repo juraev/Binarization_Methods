@@ -29,7 +29,7 @@ int main(){
 	CImgDisplay disp2(*niblack, "Niblack");
 	CImgDisplay disp3(*otsu, "Otsu");
 //	while(!disp1.is_closed()){
-	while(!disp.is_closed()&&!disp1.is_closed()&&!disp2.is_closed()){
+	while(!disp.is_closed()&&!disp1.is_closed()&&!disp2.is_closed()&&!disp3.is_closed()){
 
 	}
 
