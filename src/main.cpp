@@ -12,8 +12,8 @@ using namespace std;
 
 int main(){
 	string s;
-
-	cin >> s;
+	s = "image.png";
+//	cin >> s;
 	Image<> img(s);
 	CImg<unsigned char>* bernsen = img.bernsenTech(25);
 	CImg<unsigned char>* sauvola = img.SauvolaTech();
