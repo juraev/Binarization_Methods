@@ -176,6 +176,7 @@ public:
     		hist[z] ++;
     		sum += z;
     	}
+
     	sum /= pixnum;
     	double w1 = 0, w2 = 1, m1 = 0, m2 = sum;
     	double mn = 0, tmp = 0;

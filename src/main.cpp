@@ -75,6 +75,7 @@ int main(int argc, char** args){
 	s1 = s + "/otsu.jpg";
 	otsu->save_jpeg(s1.c_str());
 
+
 //	CImgDisplay disp(*bernsen, "Bernsen");
 //	CImgDisplay disp1(*sauvola, "Sauvola");
 //	CImgDisplay disp2(*niblack, "Niblack");
