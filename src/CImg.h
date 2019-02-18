@@ -55,7 +55,10 @@
 // Set version number of the library.
 #ifndef cimg_version
 #define cimg_version 245
+//<<<<<<< HEAD
 #define cimg_display 0
+//=======
+//>>>>>>> branch 'master' of https://github.com/juraev/Binarization_Methods.git
 
 /*-----------------------------------------------------------
  #

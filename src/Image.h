@@ -149,7 +149,9 @@ public:
 		return bw;
 	}
 
+//<<<<<<< HEAD
     CImg<uchar>* SauvolaTech(int r = 15, float k = 0.34, int R = 128){
+
     	std::clog << "sauvola...\n";
     	CImg<uchar>* bw = new CImg<uchar>(_width, _height);
 		int x1, x2, y1, y2;
@@ -176,7 +178,6 @@ public:
     		hist[z] ++;
     		sum += z;
     	}
-
     	sum /= pixnum;
     	double w1 = 0, w2 = 1, m1 = 0, m2 = sum;
     	double mn = 0, tmp = 0;
