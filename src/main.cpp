@@ -20,7 +20,7 @@ long long getTime(){
 }
 
 int main(int argc, char** args){
-	ofstream file("/home/jack/eclipse-workspace/Binarization-Methods/stats.csv", std::ios::app);
+	//ofstream file("/home/jack/eclipse-workspace/Binarization-Methods/stats.csv", std::ios::app);
 	string s, s1;
 
 	s = args[1];
@@ -81,8 +81,8 @@ int main(int argc, char** args){
 //	CImgDisplay disp2(*niblack, "Niblack");
 //	CImgDisplay disp3(*otsu, "Otsu");
 
-	file << otsu->_width << "," << otsu->_height << "," << b << "," << n << "," << sa << "," << ot <<endl;
-	file.close();
+	//file << otsu->_width << "," << otsu->_height << "," << b << "," << n << "," << sa << "," << ot <<endl;
+	//file.close();
 
 	//	while(!disp1.is_closed()){
 //	while(!disp.is_closed()&&!disp1.is_closed()&&!disp2.is_closed()&&!disp3.is_closed()){
