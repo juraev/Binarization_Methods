@@ -2,7 +2,7 @@
  * main.cpp
  *
  *  Created on: Jan 3, 2019
- *      Author: jack
+ *      Author: juraev
  */
 
 #include <iostream>
